@@ -10,20 +10,11 @@ class DeepSeekClient:
             base_url="https://api.deepseek.com"
         )
 
-    def chat(self, user_message: str) -> str:
+    def chat(self, messages: list) -> str:
         try:
             response = self.client.chat.completions.create(
                 model=self.model_name,
-                messages=[
-                    {
-                        "role": "system", 
-                        "content": "你是一个辅助用户学习的助手。请根据用户的输入提供有用和相关的回答。"
-                    },
-                    {
-                        "role": "user", 
-                        "content": user_message
-                    }
-                ],
+                messages = messages,
                 max_tokens=1000,
             )
         except Exception as e:
